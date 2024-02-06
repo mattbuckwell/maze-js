@@ -1,5 +1,6 @@
 // destructuring to get access to the following objects from the matter js library
-const { Engine, Render, Runner, World, Bodies } = Matter;
+const { Engine, Render, Runner, World, Bodies, MouseConstraint, Mouse } =
+  Matter;
 
 // use engine to transition from our current state of our entire world into a new state
 const engine = Engine.create(); // create a new engine
@@ -23,6 +24,14 @@ Render.run(render);
 
 // this is what coordinates the changes in state a to state b
 Runner.run(Runner.create(), engine);
+
+// adding mouse functionality to our world
+World.add(
+  world,
+  MouseConstraint.create(engine, {
+    mouse: Mouse.create(render.canvas), // options object with a mouse property
+  })
+);
 
 /*
 // bodies object represents the ability to create shapes
