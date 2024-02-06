@@ -2,6 +2,9 @@
 const { Engine, Render, Runner, World, Bodies, MouseConstraint, Mouse } =
   Matter;
 
+const width = 800;
+const height = 600;
+
 // use engine to transition from our current state of our entire world into a new state
 const engine = Engine.create(); // create a new engine
 // get access to the 'world' that was create when we created a new engine
@@ -14,8 +17,11 @@ const render = Render.create({
   engine: engine,
   // options object - the specs of the canvas element that will display all the content
   options: {
-    width: 800,
-    height: 600,
+    // wireframes - to either show an outline of the shape or the shape filled with colour
+    wireframes: false,
+    // because the const has the same name, no need to write it out eg. width: width
+    width,
+    height,
   },
 });
 
@@ -54,5 +60,23 @@ const walls = [
 ];
 World.add(world, walls);
 
-// adding rectangle to world
-World.add(world, Bodies.rectangle(200, 200, 50, 50));
+// Random Shapes at different locations on the canvas
+
+for (let i = 0; i < 30; i++) {
+  if (Math.random() > 0.5) {
+    World.add(
+      world,
+      Bodies.rectangle(Math.random() * width, Math.random() * height, 50, 50)
+    );
+  } else {
+    World.add(
+      world,
+      Bodies.circle(Math.random() * width, Math.random() * height, 30, {
+        render: {
+          // changing the colour of the shape to a fixed colour
+          fillStyle: "red",
+        },
+      })
+    );
+  }
+}
