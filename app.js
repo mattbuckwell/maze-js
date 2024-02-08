@@ -1,6 +1,6 @@
 const { Engine, Render, Runner, World, Bodies } = Matter;
 
-// the math is easier for a maze with the canvas is a square
+// the math is easier for a maze when the canvas is a square
 const width = 600;
 const height = 600;
 
@@ -21,7 +21,8 @@ Render.run(render);
 
 Runner.run(Runner.create(), engine);
 
-// Walls
+// ---- Walls ----
+
 const walls = [
   // making use of the variables for the placements instead of fixed figures
   Bodies.rectangle(width / 2, 0, width, 40, { isStatic: true }),
@@ -30,3 +31,22 @@ const walls = [
   Bodies.rectangle(width, height / 2, 40, height, { isStatic: true }),
 ];
 World.add(world, walls);
+
+// ---- Maze Generation ----
+
+const grid = Array(3)
+  .fill(null)
+  .map(() => Array(3).fill(false));
+/*
+    Array(3) - create an empty array that has 3 possible places in it (has no elements)
+
+    fill - adding a default value inside of the places in the array
+
+    map - statement will run the inner function 3 times and each time we are going to
+    generate a brand new and different array that has a default value of 'false'
+
+    const grid = Array(3).fill([false, false, false]);
+    -- this would look the same but all 3 arrays point to the same one, change one change them all
+  */
+
+console.log(grid);

@@ -1,3 +1,5 @@
+// -----------  MATTER.JS DEMO ---------------
+
 // destructuring to get access to the following objects from the matter js library
 const { Engine, Render, Runner, World, Bodies, MouseConstraint, Mouse } =
   Matter;
