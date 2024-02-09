@@ -59,3 +59,24 @@ const horizontals = Array(cells - 1)
   .map(() => Array(cells).fill(false));
 
 // console.log(horizontals);
+
+// Pick a random starting point
+const startRow = Math.floor(Math.random() * cells);
+const startColumn = Math.floor(Math.random() * cells);
+// console.log(startRow, startColumn);
+
+// define a function to call over and over using the startRow and startColumn and
+// inside the function, we are going to go through the algorithm for checking if a cell
+// has been visited or not
+const stepThroughCell = (row, column) => {
+  // If i have visited the cell at [row, column], then return
+  // Mark this cell as being visited (true) - using the grid array
+  // Assemble randomly-ordered list of neighbors
+  // For each neighbor...
+  // See if that neighbour is out of bounds
+  // If we have visited that neighbour, continue to next neighbor
+  // Remove a wall from either horizontals or verticals array
+  // Visit that next cell
+};
+
+stepThroughCell(startRow, startColumn);
