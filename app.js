@@ -35,6 +35,26 @@ World.add(world, walls);
 
 // ---- Maze Generation ----
 
+// function the shuffle the array passed into it
+const shuffle = (arr) => {
+  let counter = arr.length;
+
+  while (counter > 0) {
+    // getting a random index location
+    const index = Math.floor(Math.random() * counter);
+    // decrease counter by 1
+    counter--;
+    // temp variable to hold the value at the position of counter inside of the array
+    const temp = arr[counter];
+    // swap the value at arr[counter] with the value at arr[index]
+    arr[counter] = arr[index];
+    // change the value in arr[index] with the temp value
+    arr[index] = temp;
+  }
+  // return the array
+  return arr;
+};
+
 const grid = Array(cells)
   .fill(null)
   .map(() => Array(cells).fill(false));
@@ -69,14 +89,14 @@ const startColumn = Math.floor(Math.random() * cells);
 // inside the function, we are going to go through the algorithm for checking if a cell
 // has been visited or not
 const stepThroughCell = (row, column) => {
-  // If i have visited the cell at [row, column], then return
+  // -- If i have visited the cell at [row, column], then return
   if (grid[row][column] === true) {
     return;
   }
-  // Mark this cell as being visited (true) - using the grid array
+  // -- Mark this cell as being visited (true) - using the grid array
   grid[row][column] = true;
-  // Assemble randomly-ordered list of neighbors
-  const neighbours = [
+  // --  Assemble randomly-ordered list of neighbors
+  const neighbours = shuffle([
     // neighbour above
     [row - 1, column],
     // neighbour to the right
@@ -85,13 +105,14 @@ const stepThroughCell = (row, column) => {
     [row + 1, column],
     // neighbour to the left
     [row, column - 1],
-  ];
-  // For each neighbor...
-  // See if that neighbour is out of bounds
-  // If we have visited that neighbour, continue to next neighbor
-  // Remove a wall from either horizontals or verticals array
-  // Visit that next cell
+  ]);
+  console.log(neighbours);
+  // -- For each neighbor...
+  // -- See if that neighbour is out of bounds
+  // -- If we have visited that neighbour, continue to next neighbor
+  // -- Remove a wall from either horizontals or verticals array
+  // -- Visit that next cell
 };
 
-stepThroughCell(startRow, startColumn);
+stepThroughCell(1, 1);
 console.log(grid);
