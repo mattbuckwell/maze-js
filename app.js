@@ -83,7 +83,6 @@ const horizontals = Array(cells - 1)
 // Pick a random starting point
 const startRow = Math.floor(Math.random() * cells);
 const startColumn = Math.floor(Math.random() * cells);
-// console.log(startRow, startColumn);
 
 // define a function to call over and over using the startRow and startColumn and
 // inside the function, we are going to go through the algorithm for checking if a cell
@@ -132,6 +131,7 @@ const stepThroughCell = (row, column) => {
     } else if (direction === "down") {
       horizontals[row][column] = true;
     }
+    stepThroughCell(nextRow, nextColumn);
   }
   // -- Visit that next cell
 };
