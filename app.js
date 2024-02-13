@@ -101,12 +101,11 @@ const stepThroughCell = (row, column) => {
     [row - 1, column, "up"],
     // // neighbour to the right
     [row, column + 1, "right"],
-    // // neighbour below
+    // // // neighbour below
     [row + 1, column, "down"],
-    // neighbour to the left
+    // // neighbour to the left
     [row, column - 1, "left"],
   ]);
-  console.log(neighbours);
   // -- For each neighbor...
   for (let neighbour of neighbours) {
     const [nextRow, nextColumn, direction] = neighbour;
@@ -124,14 +123,18 @@ const stepThroughCell = (row, column) => {
       continue;
     }
     // -- Remove a wall from either horizontals or verticals array
-    if (direction == "left") {
+    if (direction === "left") {
       verticals[row][column - 1] = true;
     } else if (direction === "right") {
       verticals[row][column] = true;
+    } else if (direction === "up") {
+      horizontals[row - 1][column] = true;
+    } else if (direction === "down") {
+      horizontals[row][column] = true;
     }
   }
   // -- Visit that next cell
 };
 
-stepThroughCell(1, 1);
-console.log(grid);
+stepThroughCell(startRow, startColumn);
+// console.log(grid);
