@@ -99,9 +99,9 @@ const stepThroughCell = (row, column) => {
   const neighbours = shuffle([
     // neighbour above - string added to help determine which way was moved in algorithm
     [row - 1, column, "up"],
-    // neighbour to the right
+    // // neighbour to the right
     [row, column + 1, "right"],
-    // neighbour below
+    // // neighbour below
     [row + 1, column, "down"],
     // neighbour to the left
     [row, column - 1, "left"],
@@ -124,6 +124,11 @@ const stepThroughCell = (row, column) => {
       continue;
     }
     // -- Remove a wall from either horizontals or verticals array
+    if (direction == "left") {
+      verticals[row][column - 1] = true;
+    } else if (direction === "right") {
+      verticals[row][column] = true;
+    }
   }
   // -- Visit that next cell
 };
