@@ -131,10 +131,20 @@ const stepThroughCell = (row, column) => {
     } else if (direction === "down") {
       horizontals[row][column] = true;
     }
+    // -- Visit that next cell
     stepThroughCell(nextRow, nextColumn);
   }
-  // -- Visit that next cell
 };
 
 stepThroughCell(startRow, startColumn);
-// console.log(grid);
+
+// horizontals is a 2 dimensional array, when we do a forEach we will receive one of the inner
+// arrays
+horizontals.forEach((row) => {
+  row.forEach((open) => {
+    if (open) {
+      return;
+    }
+    const wall = Bodies.rectangle();
+  });
+});
