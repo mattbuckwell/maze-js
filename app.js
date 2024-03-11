@@ -5,6 +5,8 @@ const cells = 3;
 const width = 600;
 const height = 600;
 
+const unitLength = width / cells;
+
 const engine = Engine.create();
 const { world } = engine;
 const render = Render.create({
@@ -140,11 +142,24 @@ stepThroughCell(startRow, startColumn);
 
 // horizontals is a 2 dimensional array, when we do a forEach we will receive one of the inner
 // arrays
-horizontals.forEach((row) => {
-  row.forEach((open) => {
+// - first argument is what we are iterating over and the second argument is the index
+horizontals.forEach((row, rowIndex) => {
+  // second argument is the index of the column we are iterating over
+  row.forEach((open, columnIndex) => {
     if (open) {
       return;
     }
-    const wall = Bodies.rectangle();
+    // formula for the x and y coordinates
+    const wall = Bodies.rectangle(
+      columnIndex * unitLength + unitLength / 2,
+      rowIndex * unitLength + unitLength,
+      unitLength,
+      10,
+      {
+        isStatic: true,
+      }
+    );
+    // add the drawing of the horizontal walls to the world
+    World.add(world, wall);
   });
 });
