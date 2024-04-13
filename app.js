@@ -200,3 +200,22 @@ World.add(world, goal);
 // first two arguments to a circle is x and y coordinates of the circle
 const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 4);
 World.add(world, ball);
+
+document.addEventListener("keydown", (event) => {
+  // up key is pressed
+  if (event.key === "w") {
+    console.log("move ball up");
+  }
+  // right key is pressed
+  if (event.key === "d") {
+    console.log("move ball right");
+  }
+  // down key is pressed
+  if (event.key === "s") {
+    console.log("move ball down");
+  }
+  // left key is pressed
+  if (event.key === "a") {
+    console.log("move ball left");
+  }
+});
