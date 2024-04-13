@@ -1,13 +1,14 @@
 const { Engine, Render, Runner, World, Bodies, Body } = Matter;
 
 // adstracting values out of the code to be more flexible
-const cells = 3;
+const cells = 15;
 const width = 600;
 const height = 600;
 
 const unitLength = width / cells;
 
 const engine = Engine.create();
+engine.world.gravity.y = 0;
 const { world } = engine;
 const render = Render.create({
   element: document.body,
@@ -28,10 +29,10 @@ Runner.run(Runner.create(), engine);
 
 const walls = [
   // making use of the variables for the placements instead of fixed figures
-  Bodies.rectangle(width / 2, 0, width, 2, { isStatic: true }),
-  Bodies.rectangle(width / 2, height, width, 2, { isStatic: true }),
-  Bodies.rectangle(0, height / 2, 2, height, { isStatic: true }),
-  Bodies.rectangle(width, height / 2, 2, height, { isStatic: true }),
+  Bodies.rectangle(width / 2, 0, width, 3, { isStatic: true }),
+  Bodies.rectangle(width / 2, height, width, 3, { isStatic: true }),
+  Bodies.rectangle(0, height / 2, 3, height, { isStatic: true }),
+  Bodies.rectangle(width, height / 2, 3, height, { isStatic: true }),
 ];
 World.add(world, walls);
 
