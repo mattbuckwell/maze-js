@@ -1,4 +1,4 @@
-const { Engine, Render, Runner, World, Bodies } = Matter;
+const { Engine, Render, Runner, World, Bodies, Body } = Matter;
 
 // adstracting values out of the code to be more flexible
 const cells = 3;
@@ -201,21 +201,26 @@ World.add(world, goal);
 const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 4);
 World.add(world, ball);
 
+// we are going to take the velocity of the ball and update is based on the key pressed
 document.addEventListener("keydown", (event) => {
+  // look at the current velocity of the ball - destructed into x and y variable
+  const { x, y } = ball.velocity;
+
   // up key is pressed
   if (event.key === "w") {
-    console.log("move ball up");
+    // this is how we update the velocity of a shape
+    Body.setVelocity(ball, { x, y: y - 5 });
   }
   // right key is pressed
   if (event.key === "d") {
-    console.log("move ball right");
+    Body.setVelocity(ball, { x: x + 5, y });
   }
   // down key is pressed
   if (event.key === "s") {
-    console.log("move ball down");
+    Body.setVelocity(ball, { x, y: y + 5 });
   }
   // left key is pressed
   if (event.key === "a") {
-    console.log("move ball left");
+    Body.setVelocity(ball, { x: x - 5, y });
   }
 });
