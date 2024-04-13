@@ -183,6 +183,7 @@ verticals.forEach((row, rowIndex) => {
   });
 });
 
+// --- GOAL ---
 // code for the goal to be displayed in the maze and the bottom ride corner
 const goal = Bodies.rectangle(
   width - unitLength / 2,
@@ -194,3 +195,8 @@ const goal = Bodies.rectangle(
   }
 );
 World.add(world, goal);
+
+// --- BALL ---
+// first two arguments to a circle is x and y coordinates of the circle
+const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 4);
+World.add(world, ball);
