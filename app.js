@@ -1,7 +1,7 @@
-const { Engine, Render, Runner, World, Bodies, Body } = Matter;
+const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
 // adstracting values out of the code to be more flexible
-const cells = 15;
+const cells = 3;
 const width = 600;
 const height = 600;
 
@@ -193,13 +193,16 @@ const goal = Bodies.rectangle(
   unitLength * 0.7,
   {
     isStatic: true,
+    label: "goal",
   }
 );
 World.add(world, goal);
 
 // --- BALL ---
 // first two arguments to a circle is x and y coordinates of the circle
-const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 4);
+const ball = Bodies.circle(unitLength / 2, unitLength / 2, unitLength / 4, {
+  label: "ball",
+});
 World.add(world, ball);
 
 // we are going to take the velocity of the ball and update is based on the key pressed
@@ -224,4 +227,28 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "a") {
     Body.setVelocity(ball, { x: x - 5, y });
   }
+});
+
+// Win Condition
+
+Events.on(engine, "collisionStart", (event) => {
+  // callback function - will be invoked when theres a collision between 2 different shapes
+  // inside of our world
+
+  // because the collision is retured as an array, we iterate over it to show what information
+  // is shown from the collision
+  event.pairs.forEach((collision) => {
+    // console.log(collision);
+
+    // add the labels we want to check collided into an array
+    const labels = ["ball", "goal"];
+    // use an if statement to check if either ball or goal is bodyA and the other is bodyB
+    // which would mean the ball has collided with the goal
+    if (
+      labels.includes(collision.bodyA.label) &&
+      labels.includes(collision.bodyB.label)
+    ) {
+      console.log("User Won!");
+    }
+  });
 });
