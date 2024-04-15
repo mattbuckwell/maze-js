@@ -2,6 +2,7 @@ const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
 // adstracting values out of the code to be more flexible
 const cells = 6;
+// gets the value of the viewable screen of the user
 const width = window.innerWidth;
 const height = window.innerHeight;
 
