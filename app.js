@@ -2,8 +2,8 @@ const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
 // adstracting values out of the code to be more flexible
 const cells = 6;
-const width = 600;
-const height = 600;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 const unitLength = width / cells;
 
@@ -231,7 +231,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// Win Condition
+// --- Win Condition ---
 
 Events.on(engine, "collisionStart", (event) => {
   // callback function - will be invoked when theres a collision between 2 different shapes
