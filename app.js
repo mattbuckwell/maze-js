@@ -1,7 +1,7 @@
 const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
 // adstracting values out of the code to be more flexible
-const cells = 3;
+const cells = 6;
 const width = 600;
 const height = 600;
 
@@ -158,6 +158,7 @@ horizontals.forEach((row, rowIndex) => {
       10,
       {
         isStatic: true,
+        label: "wall",
       }
     );
     // add the drawing of the horizontal walls to the world
@@ -178,6 +179,7 @@ verticals.forEach((row, rowIndex) => {
       unitLength,
       {
         isStatic: true,
+        label: "wall",
       }
     );
     World.add(world, wall);
@@ -248,7 +250,14 @@ Events.on(engine, "collisionStart", (event) => {
       labels.includes(collision.bodyA.label) &&
       labels.includes(collision.bodyB.label)
     ) {
-      console.log("User Won!");
+      world.gravity.y = 1;
+      // iterate over the shapes in our world and change it the static to false so everything
+      // falls down when the game has been won
+      world.bodies.forEach((body) => {
+        if (body.label === "wall") {
+          Body.setStatic(body, false);
+        }
+      });
     }
   });
 });
