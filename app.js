@@ -1,8 +1,8 @@
 const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
 // adstracting values out of the code to be more flexible
-const cellsHorizontal = 10;
-const cellsVertical = 8;
+const cellsHorizontal = 8;
+const cellsVertical = 5;
 // gets the value of the viewable screen of the user
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -18,7 +18,7 @@ const render = Render.create({
   engine: engine,
   options: {
     // shows the walls and shapes as outlines
-    wireframes: true,
+    wireframes: false,
     width,
     height,
   },
@@ -162,6 +162,9 @@ horizontals.forEach((row, rowIndex) => {
       {
         isStatic: true,
         label: "wall",
+        render: {
+          fillStyle: "red",
+        },
       }
     );
     // add the drawing of the horizontal walls to the world
@@ -183,6 +186,9 @@ verticals.forEach((row, rowIndex) => {
       {
         isStatic: true,
         label: "wall",
+        render: {
+          fillStyle: "red",
+        },
       }
     );
     World.add(world, wall);
@@ -199,6 +205,9 @@ const goal = Bodies.rectangle(
   {
     isStatic: true,
     label: "goal",
+    render: {
+      fillStyle: "green",
+    },
   }
 );
 World.add(world, goal);
@@ -209,6 +218,9 @@ const ballRadius = Math.min(unitLengthX, unitLengthY) / 4;
 // first two arguments to a circle is x and y coordinates of the circle
 const ball = Bodies.circle(unitLengthX / 2, unitLengthY / 2, ballRadius, {
   label: "ball",
+  render: {
+    fillStyle: "blue",
+  },
 });
 World.add(world, ball);
 
