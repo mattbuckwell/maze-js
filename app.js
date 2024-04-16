@@ -267,6 +267,7 @@ Events.on(engine, "collisionStart", (event) => {
       labels.includes(collision.bodyA.label) &&
       labels.includes(collision.bodyB.label)
     ) {
+      document.querySelector(".winner").classList.remove("hidden");
       world.gravity.y = 1;
       // iterate over the shapes in our world and change it the static to false so everything
       // falls down when the game has been won
